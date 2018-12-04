@@ -1,0 +1,109 @@
+/*
+==========Page Styling==========
+*/
+
+body {
+	background-color: rgb(24, 24, 24);
+	margin: 0px;
+	color: white;
+}
+
+/*
+==========Header Styling==========
+*/
+
+.header {
+	width: auto;
+	height: 50px;
+	background: black;
+	padding-top: 1px;
+	text-align: center;
+}
+
+/*
+==========Search Bar Styling==========
+*/
+
+.searchBar {
+	background: black;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	height: 50px;
+	padding-top: 1px; 
+	width: auto;	
+}
+
+.searchFlexContainer {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	flex-wrap: wrap;
+	flex: 0 2 420px;
+	padding-top: 15px;
+}
+
+.playlistFlexContainer {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	flex-wrap: wrap;
+	flex: 0 2 300px;
+	padding-top: 15px;
+}
+
+.timeRange {
+	flex: 0 0 180px;
+}
+
+.numSongs {
+	flex: 0 0 170px;
+}
+
+.returnButton {
+	flex: 0 0 auto;
+}
+
+.playlistName {
+	flex: 0 0 180px;
+}
+
+.playlistCreate {
+	flex: 0 0 auto;
+	padding-left: 10px;
+}
+
+/*
+==========Song Flex Styling=========
+*/
+
+.flexContainer {
+	display: flex;
+	flex-flow: row wrap;
+	margin: 30px;
+}
+
+.flexItem {
+	flex: 0 0 400px;
+    padding-right: 20px;
+}
+
+/*
+==========Grid Styling==========
+*/
+.gridContainer {
+	display: grid;
+	grid-template-columns: max-content auto;
+	grid-gap: 10px;
+	padding-bottom: 30px;
+}
+
+.image {
+
+}
+
+.gridInfo {
+	padding-top: 60px;
+	color: white;
+}

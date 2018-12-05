@@ -1,11 +1,20 @@
+@import url("https://use.typekit.net/ivd2uzt.css"); /*adobe fonts*/
+
 /*
 ==========Page Styling==========
 */
 
 body {
-	background-color: rgb(24, 24, 24);
+	background-color: #191414;
 	margin: 0px;
 	color: white;
+	font-family: proxima-nova;
+}
+
+input {
+	border-radius: 10px;
+    border: solid 1px black;
+    padding-left: 5px;
 }
 
 /*
@@ -29,11 +38,11 @@ body {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	justify-content: center;
+	justify-content: space-evenly;
 	height: 50px;
 	padding-top: 1px; 
 	width: auto;	
-}
+}	
 
 .searchFlexContainer {
 	display: flex;
@@ -49,7 +58,7 @@ body {
 	flex-direction: row;
 	justify-content: center;
 	flex-wrap: wrap;
-	flex: 0 2 300px;
+	flex: 0 2 330px;
 	padding-top: 15px;
 }
 
@@ -58,20 +67,19 @@ body {
 }
 
 .numSongs {
-	flex: 0 0 170px;
-}
-
-.returnButton {
-	flex: 0 0 auto;
-}
-
-.playlistName {
 	flex: 0 0 180px;
 }
 
-.playlistCreate {
+.button {
 	flex: 0 0 auto;
-	padding-left: 10px;
+	border-radius: 10px;
+    border: solid 1px black;
+    background-color: #1db954;
+    color: white;
+}
+
+.playlistName {
+	flex: 0 0 215px;
 }
 
 /*
@@ -85,8 +93,8 @@ body {
 }
 
 .flexItem {
-	flex: 0 0 400px;
-    padding-right: 20px;
+	flex: 0 0 250px; /*if the album art size is changed this needs to be changed to the same size!*/
+    padding: 10px 36px 10px 36px;
 }
 
 /*
@@ -94,16 +102,14 @@ body {
 */
 .gridContainer {
 	display: grid;
-	grid-template-columns: max-content auto;
-	grid-gap: 10px;
+	grid-template-rows: max-content auto;
 	padding-bottom: 30px;
 }
 
-.image {
-
-}
-
 .gridInfo {
-	padding-top: 60px;
 	color: white;
+    padding: 5px 5px 5px 10px;
+    background-color: rgb(50,50,50);
+    /*background-color: #1db954;*/
+    border-radius: 0px 0px 15px 15px;
 }

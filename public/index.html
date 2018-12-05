@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Example of the Authorization Code flow with Spotify</title>
+    <title>Jamtify</title>
     <link rel="stylesheet" href="/stylesheet.css">
     <style type="text/css">
       #login, #loggedin {
@@ -19,7 +19,7 @@
   <body onload="returnUserInfo()">
     <div class="container">
       <div id="login">
-        <h1>This is an example of the Authorization Code flow</h1>
+        <h1>You need to login</h1>
         <a href="/login" class="btn btn-primary">Log in with Spotify</a>
       </div>
       <div id="loggedin">
@@ -30,10 +30,10 @@
           <div class="searchFlexContainer">
             <div class="timeRange">
               <span>Time Range: </span>
-              <select id="timeRange">
+              <select id="timeRange" style="border-radius: 10px; padding-left: 3px;">
                 <option value="short_term">Short</option>
-                <option value="medium_term">medium</option>
-                <option value="long_term">long</option>
+                <option value="medium_term">Medium</option>
+                <option value="long_term">Long</option>
               </select>
             </div>
             <div class="numSongs">
@@ -41,16 +41,16 @@
               <input id="number" type="number" name="songNum" value="10" style="width: 35px;">
             </div>
             <div class="returnButton">
-              <button class="returnButton" onclick="returnList()">Return</button>
+              <button class="button" onclick="returnList()"><b>Return</b></button>
             </div>
           </div>
           <div class="playlistFlexContainer">
             <div class="playlistName">
               <span>Playlist Name: </span>
-              <input id="playlistName" type="text" name="playlistName" placeholder="Playlist Name" style="width: 75px;">
+              <input id="playlistName" type="text" name="playlistName" placeholder="Playlist Name" style="width: 100px;">
             </div>
             <div class="playlistCreate">
-              <button class="playlistCreateButton" onclick="createPlaylist()">Create Playlist</button>
+              <button class="button" onclick="createPlaylist()"><b>Create Playlist</b></button>
             </div>
           </div>
         </div>
@@ -65,7 +65,7 @@
         {{#each items}}
           <div class="flexItem">
             <div class="gridContainer">
-              <img src="{{album.images.1.url}}" class="image" height="150" width="150">
+              <img src="{{album.images.1.url}}" class="image" height="250" width="250">
               <div class="gridInfo">
                 <span class="song">{{name}}</span>
                 <br>

@@ -106,7 +106,9 @@ function createPlaylist() {
         url: 'https://api.spotify.com/v1/users/' + userInfo.id + '/playlists',
         data: JSON.stringify({
           name: playlistName,
-          public: false
+          public: false,
+          collaborative: false,
+          description: "a test description, but damn what a good looking playlist!"
         }),
         dataType: 'json', 
         headers: {

@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Jamtify</title>
+    <title>SpotMyJams</title>
     <link rel="stylesheet" href="/stylesheet.css">
     <style type="text/css">
       #login, #loggedin {
@@ -18,9 +18,9 @@
 
   <body onload="returnUserInfo()">
     <div class="container">
-      <div id="login">
+      <div id="login" style="text-align: center; padding-top: 25%;">
         <h1>You need to login</h1>
-        <a href="/login" class="btn btn-primary">Log in with Spotify</a>
+        <a href="/login" class="loginButton">Log in with Spotify</a>
       </div>
       <div id="loggedin">
         <div class="header">
@@ -29,7 +29,7 @@
         <div class="searchBar">
           <div class="searchFlexContainer">
             <div class="timeRange">
-              <span>Time Range: </span>
+              <span style="padding-right: 3px;">Time Range: </span>
               <select id="timeRange" style="border-radius: 10px; padding-left: 3px;">
                 <option value="short_term">Short</option>
                 <option value="medium_term">Medium</option>
@@ -37,28 +37,56 @@
               </select>
             </div>
             <div class="numSongs">
-              <span>Number of Songs: </span>
-              <input id="number" type="number" name="songNum" value="10" style="width: 35px;">
+              <span style="padding-right: 3px;">Number of Songs: </span>
+              <input id="number" type="number" name="songNum" value="10" style="width: 35px;" max="50" min="1">
             </div>
             <div class="returnButton">
               <button class="button" onclick="returnList()"><b>Return</b></button>
             </div>
           </div>
-          <div class="playlistFlexContainer">
-            <div class="playlistName">
-              <span>Playlist Name: </span>
-              <input id="playlistName" type="text" name="playlistName" placeholder="Playlist Name" style="width: 100px;">
-            </div>
-            <div class="playlistCreate">
-              <button class="button" onclick="createPlaylist()"><b>Create Playlist</b></button>
-            </div>
-          </div>
+        </div>
+        <div class="playlistCreate">
+          <button class="button" onclick="openModal()" style="font-size: 20px; padding: 0px 16px 0px 16px;">
+            <b>Create Playlist</b>
+          </button>
         </div>
         <div id="user-profile">
         </div>
         <script src="func.js" type="text/javascript"></script>
       </div>
     </div>
+    <div id="playlistModal" class="modal">
+      <div class="modalContent">
+        <div class="playlistFlexContainer">
+          <div class="playlistName">
+            <span>Playlist Name: </span>
+            <input id="playlistName" type="text" name="playlistName" placeholder="Playlist Name" style="width: 100px;">
+          </div>
+          <div class="playlistPublic">
+            <span>Playlist Public: </span>
+            <input type="checkbox" id="playlistPublic">
+          </div>
+          <div class="playlistColab">
+            <span>Playlist Collaborative: </span>
+            <input type="checkbox" id="playlistColab">
+          </div>
+        </div>
+        <div class="playlistDesc">
+          <form>
+            <textarea id="playlistDesc" placeholder="Playlist Description"></textarea>
+          </form>
+        </div>
+        <div class="playlistCreate" id="playlistCreate">
+          <button class="button" onclick="createPlaylist()"><b>Create</b></button>
+        </div>
+      </div>
+    </div>
+    <div id="successModal" class="modal">
+      <div class="modalContent" style="color: #1db954">
+        <span><b>Playlist Created!</b></span>
+      </div>
+    </div>  
+
 
     <script id="user-profile-template" type="text/x-handlebars-template"> 
       <div class="flexContainer">  

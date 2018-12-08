@@ -30,6 +30,15 @@ function returnList() {
       refresh_token = params.refresh_token,
       error = params.error;
 
+  if(document.getElementById("number").value > 50) {
+    alert("50 is the maximum amount of song that will be returned.");
+    document.getElementById("number").value = 50;
+  }
+  else if(document.getElementById("number").value < 0) {
+    alert("You must at least enter 1 as the number of songs to return ya dingus");
+    document.getElementById("number").value = 1;
+  }
+
   if (error) {
     alert('There was an error during the authentication');
   } 
@@ -48,7 +57,11 @@ function returnList() {
             userProfilePlaceholder.innerHTML = userProfileTemplate(response);
             console.log(response);
             setSongList(response);
-          }
+          },
+          error: function(jqXHR, exception) {
+            console.log("jqXHR: " + jqXHR.responseJSON);
+            console.log("exception: " +exception);
+          } 
       });                  
     }
     else {
@@ -83,7 +96,7 @@ function returnUserInfo() {
       });                  
     }
     else {
-      alert('No access token found. Trying logging back in');
+      //alert('No access token found. Trying logging back in');
     }
   }
 }
@@ -94,7 +107,10 @@ function createPlaylist() {
       refresh_token = params.refresh_token,
       error = params.error;
 
-  var playlistName = document.getElementById("playlistName").value;
+  var playlistName = document.getElementById("playlistName");
+  var playlistPublic = document.getElementById("playlistPublic");
+  var playlistColab = document.getElementById("playlistColab");
+  var playlistDesc = document.getElementById("playlistDesc");
 
   if(error) {
     alert("There was an error." + error);
@@ -105,10 +121,10 @@ function createPlaylist() {
         type: 'POST',
         url: 'https://api.spotify.com/v1/users/' + userInfo.id + '/playlists',
         data: JSON.stringify({
-          name: playlistName,
-          public: false,
-          collaborative: false,
-          description: "a test description, but damn what a good looking playlist!"
+          name: playlistName.value,
+          public: playlistPublic.checked,
+          collaborative: playlistColab.checked,
+          description: playlistDesc.value
         }),
         dataType: 'json', 
         headers: {
@@ -117,12 +133,13 @@ function createPlaylist() {
         },
         success: function(response) {
           populatePlaylist(response);
+          openSuccessModal();
         },
         error: function(jqXHR, exception) {
           console.log(jqXHR.responseJSON.error);
+          alert(jqXHR.responseJSON.error.message);
         } 
       });
-      //todo: call function to populate playlist
     }
   }
 }
@@ -167,4 +184,42 @@ function populatePlaylist(playlist) {
       }
     });
   }
+}
+
+function openModal() {
+  console.log("opening modal now");
+  modal = document.getElementById("playlistModal");
+
+  modal.style.display = "block";
+}
+
+//closes the popup when the page is clicked
+window.onclick = function(event) {
+  var modal = document.getElementById("playlistModal");
+  var successModal = document.getElementById("successModal");
+
+  if(modal.style.display == "block" || successModal.style.display == "block") {
+    var playlistName = document.getElementById("playlistName");
+    var playlistPublic = document.getElementById("playlistPublic");
+    var playlistColab = document.getElementById("playlistColab");
+    var playlistDesc = document.getElementById("playlistDesc");
+
+    if (event.target == modal || event.target == successModal) {
+        successModal.style.display = "none";
+        modal.style.display = "none";
+        playlistColab.checked = false;
+        playlistPublic.checked = false;
+        playlistName.value = "";
+        playlistDesc.value = "";
+    } 
+  }
+};
+
+function openSuccessModal() {
+  var modal = document.getElementById("playlistModal");
+  var successModal = document.getElementById("successModal");
+
+  modal.style.display = "none";
+  successModal.style.display = "block";
+
 }

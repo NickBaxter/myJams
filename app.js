@@ -143,5 +143,10 @@ app.get('/refresh_token', function(req, res) {
   });
 });
 
-console.log('Listening on 3000');
-app.listen(3000);
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
+
+console.log('Listening on port ' + port);
+app.listen(port);

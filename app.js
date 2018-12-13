@@ -14,9 +14,9 @@ var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 var config = require('./config.js');
 
-var client_id = config.variables.client_id; // Your client id
-var client_secret = config.variables.client_secret; // Your secret
-var redirect_uri = config.variables.redirect_uri; // Your redirect uri
+var client_id = process.env.client_id; // Your client id
+var client_secret = process.env.client_secret; // Your secret
+var redirect_uri = process.env.redirect_uri; // Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters

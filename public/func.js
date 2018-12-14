@@ -79,7 +79,7 @@ function returnUserInfo() {
       error = params.error;
 
   if (error) {
-    alert('There was an error trying to the user information');
+    alert('There was an error trying to get the user information: ' + error);
   } 
   else {
     if (access_token) {

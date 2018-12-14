@@ -18,6 +18,7 @@ var client_id = process.env.CLIENT_ID; // Your client id
 var client_secret = process.env.CLIENT_SECRET; // Your secret
 var redirect_uri = process.env.REDIRECT_URI; // Your redirect uri
 
+
 /**
  * Generates a random string containing numbers and letters
  * @param  {number} length The length of the string
@@ -53,7 +54,7 @@ app.get('/login', function(req, res) {
       response_type: 'code',
       client_id: client_id,
       scope: scope,
-      redirect_uri: redirect_uri,
+      redirect_uri: req.get('host') + redirect_uri,
       state: state
     }));
 });

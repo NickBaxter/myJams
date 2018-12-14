@@ -17,7 +17,7 @@ var config = require('./config.js');
 var client_id = process.env.CLIENT_ID; // Your client id
 var client_secret = process.env.CLIENT_SECRET; // Your secret
 var redirect_uri = process.env.REDIRECT_URI; // Your redirect uri
-
+//var redirect_uri = "/homepage";
 
 /**
  * Generates a random string containing numbers and letters
@@ -43,6 +43,9 @@ app.use(express.static(__dirname + '/public'))
    .use(cookieParser());
 
 app.get('/login', function(req, res) {
+  console.log("req.originalUrl: " + req.get('host'));
+  fullRedirect_uri = req.get('host') + redirect_uri;
+  console.log("full redirect uri: " + fullRedirect_uri);
 
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
@@ -54,7 +57,7 @@ app.get('/login', function(req, res) {
       response_type: 'code',
       client_id: client_id,
       scope: scope,
-      redirect_uri: req.get('host') + redirect_uri,
+      redirect_uri: "http://" + req.get('host') + redirect_uri,
       state: state
     }));
 });

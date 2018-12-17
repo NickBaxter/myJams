@@ -14,9 +14,23 @@ var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
 var config = require('./config.js');
 
-var client_id = process.env.CLIENT_ID; // Your client id
-var client_secret = process.env.CLIENT_SECRET; // Your secret
-var redirect_uri = process.env.REDIRECT_URI; // Your redirect uri
+//if we aren't in production then get info from config file. 
+//I only do this so i don't have to hard code this when I'm doing development
+console.log(process.env.PROD_ENV);
+if(process.env.PROD_ENV === 'true') {
+  var client_id = process.env.CLIENT_ID;
+  var client_secret = process.env.CLIENT_SECRET; 
+  var redirect_uri = process.env.REDIRECT_URI;
+}
+else {
+  console.log("inside else now");
+  var client_id = config.variables.client_id;
+  var client_secret = config.variables.client_secret;
+  var redirect_uri = config.variables.redirect_uri;
+}
+  console.log("client_id: " + client_id);
+  console.log("client_secret: " + client_secret);
+  console.log("redirect_uri: " + redirect_uri);
 
 /**
  * Generates a random string containing numbers and letters
@@ -42,9 +56,9 @@ app.use(express.static(__dirname + '/public'))
    .use(cookieParser());
 
 app.get('/login', function(req, res) {
-  /*console.log("req.originalUrl: " + req.get('host'));
-  fullRedirect_uri = req.get('host') + redirect_uri;
-  console.log("full redirect uri: " + fullRedirect_uri);*/
+  console.log("req.baseUrl: " + req.baseUrl);
+  //fullRedirect_uri = req.get('host') + redirect_uri;
+  //console.log();
 
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
@@ -53,6 +67,13 @@ app.get('/login', function(req, res) {
   var scope = 'user-read-private user-read-email user-top-read playlist-modify-public playlist-modify-private';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
+      response_type: 'code',
+      client_id: client_id,
+      scope: scope,
+      redirect_uri: redirect_uri,
+      state: state
+    }));
+  console.log(querystring.stringify({
       response_type: 'code',
       client_id: client_id,
       scope: scope,

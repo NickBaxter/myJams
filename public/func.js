@@ -187,7 +187,6 @@ function populatePlaylist(playlist) {
 }
 
 function openModal() {
-  console.log("opening modal now");
   modal = document.getElementById("playlistModal");
 
   modal.style.display = "block";

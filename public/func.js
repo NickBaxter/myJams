@@ -55,6 +55,7 @@ function returnList() {
           },
           success: function(response) {
             userProfilePlaceholder.innerHTML = userProfileTemplate(response);
+            console.log("List returned successfully!");
             console.log(response);
             setSongList(response);
           },
@@ -107,10 +108,13 @@ function createPlaylist() {
       refresh_token = params.refresh_token,
       error = params.error;
 
+  var today = new Date();
+  var descSignature = " -This playlist was created by spotmyjams.com on " + (today.getMonth()+1) + "/" + today.getDate() + "/" + today.getFullYear(); //this signature gets added to the end of description. I tried to add a newline character, but spotify didn't seem to like it.
+
   var playlistName = document.getElementById("playlistName");
   var playlistPublic = document.getElementById("playlistPublic");
   var playlistColab = document.getElementById("playlistColab");
-  var playlistDesc = document.getElementById("playlistDesc");
+  var playlistDesc = document.getElementById("playlistDesc").value + descSignature;
 
   if(error) {
     alert("There was an error." + error);
@@ -122,9 +126,9 @@ function createPlaylist() {
         url: 'https://api.spotify.com/v1/users/' + userInfo.id + '/playlists',
         data: JSON.stringify({
           name: playlistName.value,
+          description: playlistDesc,
           public: playlistPublic.checked,
-          collaborative: playlistColab.checked,
-          description: playlistDesc.value
+          collaborative: playlistColab.checked         
         }),
         dataType: 'json', 
         headers: {
@@ -177,7 +181,7 @@ function populatePlaylist(playlist) {
         'Content-Type': 'application/json'
       },
       success: function(response) {
-        console.log(response);
+        console.log("Playlist populated successfully");
       },
       error: function(jqXHR, exception) {
         console.log(jqXHR.responseJSON.error);

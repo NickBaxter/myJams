@@ -1,6 +1,6 @@
 # myJams
 
-This project is a web page that uses spotify's web api. It will show a user their top track from various time periods, and lets you make them into playlists on your account to jam out to.
+This is a website that uses spotify's web api to show a user lists of their top tracks from various time periods, and lets you make playlists out of them to jam out to.
 
 ## Installation
 
@@ -18,10 +18,10 @@ To do so, go to [your Spotify for Developers Dashboard](https://beta.developer.s
 * http://localhost:3000 (needed for the implicit grant flow)
 * http://localhost:3000/homepage
 
-Once you have created your app, replace the `client_id`, `redirect_uri` and `client_secret` in the examples with the ones you get from My Applications.
+Once you have created your app, replace the `client_id`, `redirect_uri` and `client_secret` in the examples with the ones you get from My Applications. Make sure to hid those variables!
 
-## Running the examples
-In order to run the different examples, open the folder with the name of the flow you want to try out, and run its `app.js` file. For instance, to run the Authorization Code example do:
+## Running the server
+In order to run the program, open the folder with the project in it, and run its `app.js` file:
 
     $ cd myJams
     $ node app.js

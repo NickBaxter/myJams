@@ -1,0 +1,6 @@
+{
+  "name": "SpotMyJams",
+  "description": "A web tool for getting your top Spotify tracks, and creating a playlist from them",
+  "repository": "https://github.com/NickBaxter/myJams",
+  "keywords": ["node", "spotify", "express", "myJams"]
+}

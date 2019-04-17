@@ -26,8 +26,8 @@
   </head>
 
   <body onload="returnUserInfo()">
-    <div style="width: 100%;">
-      <div id="login" style="text-align: center; padding-top: 15%;">
+    <div>
+      <div id="login">
         <div class="container-fluid">
           <h1>Welcome to SpotMyJams</h1>
           <h3>Login to spotify to discover your top jams</h3>
@@ -36,29 +36,29 @@
       </div>
       <div id="loggedin">
         <div class="header">
-          <h2 style="margin-top: .5rem; font-weight: bold;">My Jams</h2>
+          <h2>My Jams</h2>
         </div>      
         <div class="searchBar">
           <div class="searchFlexContainer">
             <div class="timeRange">
-              <span style="padding-right: 3px;">Time Range: </span>
-              <select id="timeRange" style="border-radius: 10px; padding-left: 3px;">
+              <span>Time Range: </span>
+              <select id="timeRange">
                 <option value="short_term">Short</option>
                 <option value="medium_term">Medium</option>
                 <option value="long_term">Long</option>
               </select>
             </div>
             <div class="numSongs">
-              <span style="padding-right: 3px;">Number of Songs: </span>
-              <input id="number" type="number" name="songNum" value="10" style="width: 35px;" max="50" min="1">
+              <span>Number of Songs: </span>
+              <input id="number" type="number" name="songNum" value="10">
             </div>
-            <div class="returnButton" style="padding-bottom: 5px;">
+            <div class="returnButton">
               <button class="button" onclick="returnList()"><b>Search</b></button>
             </div>
           </div>
         </div>
         <div class="playlistCreate">
-          <button class="button" onclick="openModal()" style="font-size: 20px; padding: 0px 16px 0px 16px;">
+          <button class="button" onclick="openModal()">
             <b><i class="fab fa-spotify"></i> Create Playlist</b>
           </button>
         </div>
@@ -74,7 +74,7 @@
         <div class="playlistFlexContainer">
           <div class="playlistName">
             <span>Playlist Name: </span>
-            <input id="playlistName" type="text" name="playlistName" placeholder="Playlist Name" style="width: 100px;">
+            <input id="playlistName" type="text" name="playlistName" placeholder="Playlist Name">
           </div>
           <div class="playlistPublic">
             <span>Playlist Public: </span>
@@ -96,7 +96,7 @@
       </div>
     </div>
     <div id="successModal" class="modal">
-      <div class="modalContent" style="color: #1db954">
+      <div class="modalContent">
         <span><b>Playlist Created!</b></span>
       </div>
     </div>  

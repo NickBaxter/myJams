@@ -17,6 +17,35 @@ input {
     padding-left: 5px;
 }
 
+button:hover {
+	color: #333;
+}
+
+.timeRange > span {
+    padding-right: 3px;
+}
+
+.numSongs > span {
+    padding-right: 3px;
+}
+
+#timeRange {
+    border-radius: 10px;
+    padding-left: 3px;
+}
+
+#number {
+    width: 35px;
+}
+
+#playlistName {
+    width: 100px;
+}
+
+.returnButton {
+    padding-bottom: 5px;
+}
+
 /*
 ==========Login Styling==========
 */
@@ -25,10 +54,22 @@ input {
 	border: 1px solid #1db954;
     background-color: #1db954;
     color: white;
-    text-decoration: none;
     border-radius: 20px;
     font-size: 20px;
     padding: 3px 7px 3px 7px;
+}
+
+.loginButton:link {
+    text-decoration: none;
+}
+
+.loginButton:hover {
+    color: #333;
+}
+
+#login {
+    text-align: center;
+    padding-top: 15%;
 }
 
 /*
@@ -41,6 +82,11 @@ input {
 	background: black;
 	padding-top: 1px;
 	text-align: center;
+}
+
+.header > h2 {
+    margin-top: .5rem;
+    font-weight: bold;
 }
 
 /*

@@ -322,6 +322,16 @@ function mouseUpEvent(ev) {
   }
 }
 
+function mouseOutEvent(ev) {
+  var array = ev.path;
+  for(var i = 0; i < array.length; i++) {
+    if(array[i].id == "gridContainer") {
+      array[i].style.transform = "scale(1)";
+      break;
+    }
+  }
+}
+
 function isMobileDevice() {
     return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
 };

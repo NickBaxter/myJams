@@ -106,7 +106,7 @@
       <div class="row">  
         {{#each this}}
             <div class="flexItem" id="flexItem">          
-              <div class="gridContainer" id="gridContainer" onmousedown="mouseDownEvent(event, '{{this.uri}}')" onmouseup="mouseUpEvent(event)">
+              <div class="gridContainer" id="gridContainer" onmousedown="mouseDownEvent(event, '{{this.uri}}')" onmouseup="mouseUpEvent(event)" onmouseout="mouseOutEvent(event)">
                 <img src="{{this.albumArt}}" class="image" id="albumImage">
                 <div class="gridInfo" id="gridInfo">
                   <span class="song">{{this.artist}}</span>

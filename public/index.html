@@ -6,7 +6,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <!-- if I want to make it so mobile users can't zoom in I need to add ", user-scalable=no" to the above content string-->
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
@@ -25,7 +25,7 @@
     </style>
   </head>
 
-  <body onload="returnUserInfo()">
+  <body onload="onLoad()">
     <div>
       <div id="login">
         <div class="container-fluid">
@@ -102,19 +102,19 @@
     </div>  
 
 
-    <script id="user-profile-template" type="text/x-handlebars-template"> 
+    <script id="user-profile-template" type="text/x-handlebars-template">
       <div class="row">  
-        {{#each items}}
-          <div class="flexItem">
-            <div class="gridContainer">
-              <img src="{{album.images.1.url}}" class="image" id="albumImage">
-              <div class="gridInfo">
-                <span class="song">{{name}}</span>
-                <br>
-                <span class="artist">{{artists.0.name}}</span>
+        {{#each this}}
+            <div class="flexItem" id="flexItem">          
+              <div class="gridContainer" id="gridContainer" onmousedown="mouseDownEvent(event, '{{this.uri}}')" onmouseup="mouseUpEvent(event)">
+                <img src="{{this.albumArt}}" class="image" id="albumImage">
+                <div class="gridInfo" id="gridInfo">
+                  <span class="song">{{this.artist}}</span>
+                  <br>
+                  <span class="artist">{{this.songName}}</span>
+                </div>
               </div>
             </div>
-          </div>
         {{/each}}
       </div>
     </script>
@@ -123,6 +123,33 @@
     <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script>
       (function() {
+
+        class Track {
+          constructor(info) {
+            this.addToPlaylist = true;
+            this.uri = info.uri;
+            this.artist = info.artists[0].name;
+            this.songName = info.name;
+            this.albumArt = info.album.images[0].url;
+          }
+
+          setPlaylistStatus(status) {
+            this.addToPlaylist = status;
+          }
+
+          getPlaylistStatus() {
+            return this.addToPlaylist;
+          }
+        }
+
+        function setSongList(songList) {
+        var trackList = [];
+          for(var i = 0; i < songList.items.length; i++) {
+            var newTrack = new Track(songList.items[i]);
+            trackList[i] = newTrack;
+          }
+          return trackList;
+        }
 
         /**
          * Obtains parameters from the hash of the URL
@@ -162,7 +189,10 @@
                   'Authorization': 'Bearer ' + access_token
                 },
                 success: function(response) {
-                  userProfilePlaceholder.innerHTML = userProfileTemplate(response);
+                  var trackList = [];
+                  trackList = setSongList(response);
+                  //userProfilePlaceholder.innerHTML = userProfileTemplate(response);
+                  userProfilePlaceholder.innerHTML = userProfileTemplate(trackList);
                   console.log(response);
                   setSongList(response);
 

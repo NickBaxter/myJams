@@ -1,5 +1,37 @@
-var list;
+var trackList = [];
 var userInfo;
+var pressTimer;
+
+class Track {
+  constructor(info) {
+    this.addToPlaylist = true;
+    this.uri = info.uri;
+    this.artist = info.artists[0].name;
+    this.songName = info.name;
+    this.albumArt = info.album.images[0].url;
+  }
+
+  setPlaylistStatus(status) {
+    this.addToPlaylist = status;
+  }
+
+  getPlaylistStatus() {
+    return this.addToPlaylist;
+  }
+}
+
+function findTrack(uri) {
+  for(var i = 0; i < trackList.length; i++) {
+    if(trackList[i].uri == uri) {
+      return trackList[i];
+    }
+  }
+}
+
+function onLoad() {
+  returnUserInfo();
+  returnList();
+}
 
 function getHashParams() {
   var hashParams = {};
@@ -12,14 +44,19 @@ function getHashParams() {
 }
 
 function setSongList(songList) {
-  /*for(var i = 0; i < songList.items.length; i++) {
-    console.log(songList.items[i].uri);
-  }*/
-  list = songList;
+  for(var i = 0; i < songList.items.length; i++) {
+    var newTrack = new Track(songList.items[i]);
+    trackList[i] = newTrack;
+  }
+  console.log("----Track List----");
+  console.log(trackList);
 }
 
+/*
+  When the search button gets clicked it fires this function that makes an API call and returns
+  the list and then calls another function to set the list variable that's used to populate a playlist.
+*/
 function returnList() {
-
   var userProfileSource = document.getElementById('user-profile-template').innerHTML,
       userProfileTemplate = Handlebars.compile(userProfileSource),
       userProfilePlaceholder = document.getElementById('user-profile');
@@ -54,10 +91,10 @@ function returnList() {
             'Authorization': 'Bearer ' + access_token
           },
           success: function(response) {
-            userProfilePlaceholder.innerHTML = userProfileTemplate(response);
-            console.log("List returned successfully!");
-            console.log(response);
             setSongList(response);
+            //userProfilePlaceholder.innerHTML = userProfileTemplate(response);
+            userProfilePlaceholder.innerHTML = userProfileTemplate(trackList);
+            console.log(response);            
           },
           error: function(jqXHR, exception) {
             console.log("jqXHR: " + jqXHR.responseJSON);
@@ -148,8 +185,11 @@ function createPlaylist() {
   }
 }
 
+/*
+  Adds the songs from the list to the playlist that has been passed in by
+  loading the songs' data into a json object to be passed to the server call
+*/
 function populatePlaylist(playlist) {
-  //Loads the songs' data into a json object to be passed to the server call.
   //declares song list
   var array = [];
   var songList = {
@@ -157,9 +197,12 @@ function populatePlaylist(playlist) {
   };
 
   //sets the array inside the json object to the song's uris to be added to the playlist.
-  for(var i = 0; i < list.items.length; i++) {
-    array[i] = list.items[i].uri;
-  }
+  for(var i = 0; i < trackList.length; i++) {
+    if(trackList[i].addToPlaylist == true) {    
+      array.push(trackList[i].uri);      
+    }
+  } 
+
   songList.uris = array;
 
   var params = getHashParams();
@@ -226,3 +269,59 @@ function openSuccessModal() {
   successModal.style.display = "block";
 
 }
+
+function mouseDownEvent(ev, test) {
+  var array = ev.path;
+  var element = [];
+  var track;
+
+  for(var i = 0; i < array.length; i++) {
+    if(array[i].id == "gridContainer") {
+      element = array[i];
+      break;
+    }
+  }
+
+  if(isMobileDevice() == false) {
+    pressTimer = window.setTimeout(function() { 
+      if(element.style.opacity == "1" || element.style.opacity == "") {
+        element.style.opacity = "0.2";
+        track = findTrack(test);
+        track.setPlaylistStatus(false);
+      }
+      else {
+        element.style.opacity = "1.0";
+        track = findTrack(test);
+        track.setPlaylistStatus(true);
+      }
+    },200);
+  }
+  else {
+    if(element.style.opacity == "1" || element.style.opacity == "") {
+        element.style.opacity = "0.2";
+        track = findTrack(test);
+        track.setPlaylistStatus(false);
+      }
+      else {
+        element.style.opacity = "1.0";
+        track = findTrack(test);
+        track.setPlaylistStatus(true);
+      }
+  }
+  element.style.transform = "scale(.9)";
+}
+
+function mouseUpEvent(ev) {
+  clearTimeout(pressTimer);
+  var array = ev.path;
+  for(var i = 0; i < array.length; i++) {
+    if(array[i].id == "gridContainer") {
+      array[i].style.transform = "scale(1)";
+      break;
+    }
+  }
+}
+
+function isMobileDevice() {
+    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+};

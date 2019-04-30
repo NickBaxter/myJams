@@ -22,7 +22,6 @@ if(process.env.PROD_ENV === 'true') {
   var redirect_uri = process.env.REDIRECT_URI;
 }
 else {
-  console.log("inside else now");
   var client_id = config.variables.client_id;
   var client_secret = config.variables.client_secret;
   var redirect_uri = config.variables.redirect_uri;

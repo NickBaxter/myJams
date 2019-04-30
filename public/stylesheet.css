@@ -111,11 +111,13 @@ button:hover {
 	flex-wrap: wrap;
 	flex: 0 2 450px;
 	padding-top: 15px;
+	margin: 0px 5px 0px 5px;
 }
 
 .timeRange {
 	flex: 0 0 190px;
 	padding-bottom: 5px;
+	/* margin-left: 1px; */
 }
 
 .numSongs {
@@ -145,29 +147,37 @@ button:hover {
 	width: 100%;
 }
 
+/* this first size will be for the largest displays only */
 .flexItem {
-	flex: 0 0 20%; /*if the album art size is changed this needs to be changed to the same size!*/
-	padding: 10px 10px 10px 10px;
+	flex: 0 0 14.28%; /*if the album art size is changed this needs to be changed to the same size!*/
+	padding: 10px 10px 40px 10px; 
+}
+
+@media screen and (max-width: 1920px) {
+	.flexItem {
+		flex: 0 0 20%; /*if the album art size is changed this needs to be changed to the same size!*/
+		padding: 10px 10px 40px 10px; 
+	}
 }
 
 @media screen and (max-width: 1080px) {
 	.flexItem {
 		flex: 0 0 25%;
-		padding: 10px 10px 10px 10px;
+		padding: 10px 10px 40px 10px;
 	}
 }
 
 @media screen and (max-width: 768px) {
 	.flexItem {
 		flex: 0 0 33%; /*if the album art size is changed this needs to be changed to the same size!*/
-	    padding: 10px 10px 10px 10px;
+	    padding: 10px 10px 40px 10px;
 	}
 }
 
 @media screen and (max-width: 425px) {
 	.flexItem {
 		flex: 0 0 50%; /*if the album art size is changed this needs to be changed to the same size!*/
-	    padding: 10px 10px 10px 10px;
+	    padding: 10px 10px 40px 10px;	    
 	}
 }
 
@@ -177,7 +187,7 @@ button:hover {
 .gridContainer {
 	display: grid;
 	grid-template-rows: max-content auto;
-	padding-bottom: 30px;
+	transition: transform .2s ease-out;
 }
 
 .gridInfo {

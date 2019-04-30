@@ -1,2 +1,5 @@
 node_modules/
+spotmyjams.com.key
+spotmyjams_com.crt
+spotmyjams.csr
 config.js

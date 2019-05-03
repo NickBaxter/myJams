@@ -15,7 +15,7 @@ var cookieParser = require('cookie-parser');
 var config = require('./config.js');
 
 //if we aren't in production then get info from config file. 
-//I only do this so i don't have to hard code this when I'm doing development
+//I only do this so I don't have to hard code this when I'm doing development
 if(process.env.PROD_ENV === 'true') {
   var client_id = process.env.CLIENT_ID;
   var client_secret = process.env.CLIENT_SECRET; 
@@ -123,6 +123,7 @@ app.get('/homepage', function(req, res) {
 
         // use the access token to access the Spotify Web API
         request.get(options, function(error, response, body) {
+          console.log("test body");
           console.log(body);
         });
 

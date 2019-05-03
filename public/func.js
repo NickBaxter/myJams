@@ -96,9 +96,9 @@ function returnList() {
             userProfilePlaceholder.innerHTML = userProfileTemplate(trackList);
             console.log(response);            
           },
-          error: function(jqXHR, exception) {
+          error: function(jqXHR, exception) { //if the access token is expired it ends up here.
             console.log("jqXHR: " + jqXHR.responseJSON);
-            console.log("exception: " +exception);
+            console.log("exception: " + exception);
           } 
       });                  
     }
@@ -270,66 +270,87 @@ function openSuccessModal() {
 
 }
 
-function mouseDownEvent(ev, test) {
-  var array = ev.path;
-  var element = [];
+function mouseDownEvent(obj, test) {
+  var element = obj;
   var track;
 
-  for(var i = 0; i < array.length; i++) {
-    if(array[i].id == "gridContainer") {
-      element = array[i];
-      break;
-    }
-  }
+  console.log("Click detected");
 
   if(isMobileDevice() == false) {
+    console.log("not a mobile device");
     pressTimer = window.setTimeout(function() { 
-      if(element.style.opacity == "1" || element.style.opacity == "") {
-        element.style.opacity = "0.2";
+      if(obj.style.opacity == "1" || obj.style.opacity == "") {
+        obj.style.opacity = "0.2";
         track = findTrack(test);
         track.setPlaylistStatus(false);
       }
       else {
-        element.style.opacity = "1.0";
+        obj.style.opacity = "1.0";
         track = findTrack(test);
         track.setPlaylistStatus(true);
       }
     },200);
   }
   else {
-    if(element.style.opacity == "1" || element.style.opacity == "") {
-        element.style.opacity = "0.2";
+    console.log("it is a mobile device");
+    if(obj.style.opacity == "1" || obj.style.opacity == "") {
+        obj.style.opacity = "0.2";
         track = findTrack(test);
         track.setPlaylistStatus(false);
       }
       else {
-        element.style.opacity = "1.0";
+        obj.style.opacity = "1.0";
         track = findTrack(test);
         track.setPlaylistStatus(true);
       }
   }
-  element.style.transform = "scale(.9)";
+  obj.style.transform = "scale(.9)";
 }
 
-function mouseUpEvent(ev) {
+function test(obj, test) {
+  var element = obj;
+  var track;
+
+  console.log("touch detected");
+
+  if(isMobileDevice() == false) {
+    console.log("not a mobile device");
+    pressTimer = window.setTimeout(function() { 
+      if(obj.style.opacity == "1" || obj.style.opacity == "") {
+        obj.style.opacity = "0.2";
+        track = findTrack(test);
+        track.setPlaylistStatus(false);
+      }
+      else {
+        obj.style.opacity = "1.0";
+        track = findTrack(test);
+        track.setPlaylistStatus(true);
+      }
+    },200);
+  }
+  else {
+    console.log("it is a mobile device");
+    if(obj.style.opacity == "1" || obj.style.opacity == "") {
+        obj.style.opacity = "0.2";
+        track = findTrack(test);
+        track.setPlaylistStatus(false);
+      }
+      else {
+        obj.style.opacity = "1.0";
+        track = findTrack(test);
+        track.setPlaylistStatus(true);
+      }
+  }
+  obj.style.transform = "scale(.9)";
+}
+
+function mouseUpEvent(obj) {
   clearTimeout(pressTimer);
-  var array = ev.path;
-  for(var i = 0; i < array.length; i++) {
-    if(array[i].id == "gridContainer") {
-      array[i].style.transform = "scale(1)";
-      break;
-    }
-  }
+  obj.style.transform = "scale(1)";
 }
 
-function mouseOutEvent(ev) {
-  var array = ev.path;
-  for(var i = 0; i < array.length; i++) {
-    if(array[i].id == "gridContainer") {
-      array[i].style.transform = "scale(1)";
-      break;
-    }
-  }
+function mouseOutEvent(obj) {
+  obj.style.transform = "scale(1)";
 }
 
 function isMobileDevice() {

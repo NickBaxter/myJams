@@ -44,6 +44,7 @@ function getHashParams() {
 }
 
 function setSongList(songList) {
+  trackList = [];
   for(var i = 0; i < songList.items.length; i++) {
     var newTrack = new Track(songList.items[i]);
     trackList[i] = newTrack;

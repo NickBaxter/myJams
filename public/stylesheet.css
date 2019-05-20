@@ -21,29 +21,17 @@ button:hover {
 	color: #333;
 }
 
-.timeRange > span {
-    padding-right: 3px;
-}
-
-.numSongs > span {
-    padding-right: 3px;
-}
-
-#timeRange {
-    border-radius: 10px;
-    padding-left: 3px;
-}
-
-#number {
-    width: 35px;
-}
-
-#playlistName {
-    width: 100px;
-}
-
-.returnButton {
-    padding-bottom: 5px;
+.helpBar {
+	background-color: black;
+	width: 100%;
+	height: 50px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	padding-top: 10px;
+	/* position: absolute; */
+	/* bottom: 0; */
 }
 
 /*
@@ -70,6 +58,13 @@ button:hover {
 #login {
     text-align: center;
     padding-top: 15%;
+}
+
+.loggedIn {
+	flex: 1 1 0%;
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
 }
 
 /*
@@ -117,12 +112,14 @@ button:hover {
 .timeRange {
 	flex: 0 0 190px;
 	padding-bottom: 5px;
+	padding-right: 3px;
 	/* margin-left: 1px; */
 }
 
 .numSongs {
 	flex: 0 0 185px;
 	padding-bottom: 5px;
+	padding-right: 3px;
 }
 
 .button {
@@ -131,6 +128,19 @@ button:hover {
     border: solid 2px #1db954;
     background-color: #1db954;
     color: white;
+}
+
+#timeRange {
+    border-radius: 10px;
+    padding-left: 3px;
+}
+
+#number {
+    width: 35px;
+}
+
+.returnButton {
+    padding-bottom: 5px;
 }
 
 /*
@@ -147,7 +157,7 @@ button:hover {
 	width: 100%;
 }
 
-/* this first size will be for the largest displays only */
+/* this first size will be for the largest di plays only */
 .flexItem {
 	flex: 0 0 14.28%; /*if the album art size is changed this needs to be changed to the same size!*/
 	padding: 10px 10px 40px 10px; 
@@ -198,6 +208,10 @@ button:hover {
     border-radius: 0px 0px 15px 15px;
 }
 
+.playlist {
+	flex: 1;
+}
+
 /*
 ==========Modal Styling==========
 */
@@ -244,6 +258,10 @@ button:hover {
 
 .playlistName {
 	flex: 0 0 230px;
+}
+
+#playlistName {
+    width: 100px;
 }
 
 .playlistPublic {

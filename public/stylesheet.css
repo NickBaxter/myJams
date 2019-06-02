@@ -30,8 +30,6 @@ button:hover {
 	flex-wrap: wrap;
 	justify-content: space-evenly;
 	padding-top: 10px;
-	/* position: absolute; */
-	/* bottom: 0; */
 }
 
 /*
@@ -55,14 +53,13 @@ button:hover {
     color: #333;
 }
 
-#login {
+.login {
     text-align: center;
     padding-top: 15%;
 }
 
 .loggedIn {
 	flex: 1 1 0%;
-	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
 }

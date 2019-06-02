@@ -14,7 +14,11 @@
 
     <link rel="stylesheet" href="/stylesheet.css">
     <style type="text/css">
-      #login, #loggedIn {
+      #loggedIn {
+        display: flex;
+      }
+
+      .login, .loggedIn {
         display: none;
       }
       .text-overflow {
@@ -28,7 +32,7 @@
 
   <body onload="onLoad()">
     <div>
-      <div id="login">
+      <div id="login" class="login">
         <div class="container-fluid">
           <h1>Welcome to SpotMyJams</h1>
           <h3>Login to spotify to discover your top jams</h3>
@@ -63,7 +67,7 @@
             <b><i class="fab fa-spotify"></i> Create Playlist</b>
           </button>
         </div>
-        <div class="container-fluid" class="playlist">
+        <div class="container-fluid" class="playlist" style="flex: 1">
           <div id="user-profile">
           </div>
         </div>

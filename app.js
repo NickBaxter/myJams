@@ -26,6 +26,11 @@ else {
   var client_secret = config.variables.client_secret;
   var redirect_uri = config.variables.redirect_uri;
 }
+
+var path = require('path');
+var appDir = path.dirname(require.main.filename);
+
+console.log("Dir: " + appDir);
 /*  console.log("client_id: " + client_id);
   console.log("client_secret: " + client_secret);
   console.log("redirect_uri: " + redirect_uri);*/

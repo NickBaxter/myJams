@@ -2,6 +2,10 @@ var trackList = [];
 var userInfo;
 var pressTimer;
 
+// Get IE or Edge browser version
+var version = detectIE();
+console.log("Browser Version: " + version);
+
 class Track {
   constructor(info) {
     this.addToPlaylist = true;
@@ -28,7 +32,7 @@ function findTrack(uri) {
   }
 }
 
-function onLoad() {
+function onLoad() {6
   returnUserInfo();
   returnList();
 }
@@ -110,7 +114,21 @@ function returnList() {
     }
   }  
 }
+/*
+function refreshToken() {
+  var params = getHashParams();
 
+  var refresh_token = params.refresh_token;
+
+  console.log("refresh_token!");
+  $.ajax({
+    url: '/refresh_token',
+    data: {
+      'refresh_token': refresh_token
+    }
+  });
+}
+*/
 function returnUserInfo() { 
   var params = getHashParams();
   var access_token = params.access_token,
@@ -131,6 +149,7 @@ function returnUserInfo() {
             console.log("-----------------User info------------------");
             console.log(response);
             userInfo = response;
+            console.log("test 3");
           }
       });                  
     }
@@ -234,33 +253,11 @@ function populatePlaylist(playlist) {
   }
 }
 
-function openModal() {
+function openPlaylistModal() {
   modal = document.getElementById("playlistModal");
 
   modal.style.display = "block";
 }
-
-//closes the popup when the page is clicked
-window.onclick = function(event) {
-  var modal = document.getElementById("playlistModal");
-  var successModal = document.getElementById("successModal");
-
-  if(modal.style.display == "block" || successModal.style.display == "block") {
-    var playlistName = document.getElementById("playlistName");
-    var playlistPublic = document.getElementById("playlistPublic");
-    var playlistColab = document.getElementById("playlistColab");
-    var playlistDesc = document.getElementById("playlistDesc");
-
-    if (event.target == modal || event.target == successModal) {
-        successModal.style.display = "none";
-        modal.style.display = "none";
-        playlistColab.checked = false;
-        playlistPublic.checked = false;
-        playlistName.value = "";
-        playlistDesc.value = "";
-    } 
-  }
-};
 
 function openSuccessModal() {
   var modal = document.getElementById("playlistModal");
@@ -268,51 +265,45 @@ function openSuccessModal() {
 
   modal.style.display = "none";
   successModal.style.display = "block";
-
 }
+
+function openInstructionModal() {
+  modal = document.getElementById("instructionModal");
+
+  modal.style.display = "block";
+}
+
+//closes the popup when the page is clicked
+window.onclick = function(event) {
+  var playlistModal = document.getElementById("playlistModal");
+  var successModal = document.getElementById("successModal");
+  var instructionModal = document.getElementById("instructionModal")
+
+  if(playlistModal.style.display == "block" || successModal.style.display == "block") {
+    var playlistName = document.getElementById("playlistName");
+    var playlistPublic = document.getElementById("playlistPublic");
+    var playlistColab = document.getElementById("playlistColab");
+    var playlistDesc = document.getElementById("playlistDesc");
+
+    if (event.target == playlistModal || event.target == successModal) {
+        successModal.style.display = "none";
+        playlistModal.style.display = "none";
+        playlistColab.checked = false;
+        playlistPublic.checked = false;
+        playlistName.value = "";
+        playlistDesc.value = "";
+    } 
+  }
+  else if(instructionModal.style.display == "block") {
+        instructionModal.style.display = "none";
+  }
+};
 
 function mouseDownEvent(obj, test) {
   var element = obj;
   var track;
 
   console.log("Click detected");
-
-  if(isMobileDevice() == false) {
-    console.log("not a mobile device");
-    pressTimer = window.setTimeout(function() { 
-      if(obj.style.opacity == "1" || obj.style.opacity == "") {
-        obj.style.opacity = "0.2";
-        track = findTrack(test);
-        track.setPlaylistStatus(false);
-      }
-      else {
-        obj.style.opacity = "1.0";
-        track = findTrack(test);
-        track.setPlaylistStatus(true);
-      }
-    },200);
-  }
-  else {
-    console.log("it is a mobile device");
-    if(obj.style.opacity == "1" || obj.style.opacity == "") {
-        obj.style.opacity = "0.2";
-        track = findTrack(test);
-        track.setPlaylistStatus(false);
-      }
-      else {
-        obj.style.opacity = "1.0";
-        track = findTrack(test);
-        track.setPlaylistStatus(true);
-      }
-  }
-  obj.style.transform = "scale(.9)";
-}
-
-function test(obj, test) {
-  var element = obj;
-  var track;
-
-  console.log("touch detected");
 
   if(isMobileDevice() == false) {
     console.log("not a mobile device");
@@ -357,3 +348,34 @@ function mouseOutEvent(obj) {
 function isMobileDevice() {
     return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
 };
+
+/**
+ * detect IE
+ * returns version of IE or false, if browser is not Internet Explorer
+ * code from https://codepen.io/gapcode/pen/vEJNZN
+ */
+function detectIE() {
+  var ua = window.navigator.userAgent;
+
+  var msie = ua.indexOf('MSIE ');
+  if (msie > 0) {
+    // IE 10 or older => return version number
+    return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+  }
+
+  var trident = ua.indexOf('Trident/');
+  if (trident > 0) {
+    // IE 11 => return version number
+    var rv = ua.indexOf('rv:');
+    return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+  }
+
+  var edge = ua.indexOf('Edge/');
+  if (edge > 0) {
+    // Edge (IE 12+) => return version number
+    return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
+  }
+
+  // other browser
+  return false;
+}

@@ -26,9 +26,9 @@ else {
   var client_secret = config.variables.client_secret;
   var redirect_uri = config.variables.redirect_uri;
 }
-  console.log("client_id: " + client_id);
+/*  console.log("client_id: " + client_id);
   console.log("client_secret: " + client_secret);
-  console.log("redirect_uri: " + redirect_uri);
+  console.log("redirect_uri: " + redirect_uri);*/
 
 /**
  * Generates a random string containing numbers and letters
@@ -54,9 +54,8 @@ app.use(express.static(__dirname + '/public'))
    .use(cookieParser());
 
 app.get('/login', function(req, res) {
-  console.log("req.baseUrl: " + req.baseUrl);
-  //fullRedirect_uri = req.get('host') + redirect_uri;
-  //console.log();
+//baseUrl = req.protocol + '://' + req.get('host');
+//console.log("test 2: " + baseUrl + redirect_uri);
 
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
@@ -115,19 +114,7 @@ app.get('/homepage', function(req, res) {
         var access_token = body.access_token,
             refresh_token = body.refresh_token;
 
-        var options = {
-          url: 'https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=100',
-          headers: { 'Authorization': 'Bearer ' + access_token },
-          json: true
-        };
-
-        // use the access token to access the Spotify Web API
-        request.get(options, function(error, response, body) {
-          console.log("test body");
-          console.log(body);
-        });
-
-        // we can also pass the token to the browser to make requests from there
+        // we pass the token to the browser to make requests from there
         res.redirect('/#' +
           querystring.stringify({
             access_token: access_token,
@@ -144,6 +131,7 @@ app.get('/homepage', function(req, res) {
 });
 
 app.get('/refresh_token', function(req, res) {
+  console.log("refresh_token!!!!");
   // requesting access token from refresh token
   var refresh_token = req.query.refresh_token;
   var authOptions = {
@@ -155,15 +143,16 @@ app.get('/refresh_token', function(req, res) {
     },
     json: true
   };
-
+  console.log(authOptions);
   request.post(authOptions, function(error, response, body) {
+    console.log(body);
     if (!error && response.statusCode === 200) {
       var access_token = body.access_token;
       res.send({
         'access_token': access_token
       });
     }
-  });
+  });  
 });
 
 let port = process.env.PORT;

@@ -98,10 +98,10 @@ button:hover {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	justify-content: space-evenly;
+	justify-content: center;
 	height: auto;
-	padding-top: 1px; 
-	width: auto;	
+	padding-top: 1px;
+	width: auto;
 }	
 
 .searchFlexContainer {

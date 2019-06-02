@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <title>SpotMyJams</title>
-
+    <link rel="icon" href="/favicon.ico">
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -123,7 +123,7 @@
     <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script>
       (function() {
-
+        //this only gets run the first time so the site can render the tracks.
         class Track {
           constructor(info) {
             this.addToPlaylist = true;
@@ -195,7 +195,6 @@
                   userProfilePlaceholder.innerHTML = userProfileTemplate(trackList);
                   console.log(response);
                   setSongList(response);
-
                   $('#login').hide();
                   $('#loggedin').show();
                 }
@@ -205,9 +204,8 @@
               $('#login').show();
               $('#loggedin').hide();
           }
-        }
+        }      
       })();
     </script>
   </body>
 </html>
-

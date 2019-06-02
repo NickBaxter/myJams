@@ -110,7 +110,7 @@ function returnList() {
     else {
       // render initial screen
       $('#login').show();
-      $('#loggedin').hide();
+      $('#loggedIn').hide();
     }
   }  
 }

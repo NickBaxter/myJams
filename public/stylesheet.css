@@ -133,7 +133,7 @@ button:hover {
 }
 
 #number {
-    width: 35px;
+    width: 40px;
 }
 
 .returnButton {
@@ -229,19 +229,11 @@ button:hover {
 
 .modalContent {
 	background-color: rgb(50,50,50);
-    margin: auto;
-    padding: 20px;
-    border-radius: 20px;
-    width: 50%;
-}
-
-.modalContent {
-	background-color: rgb(50,50,50);
-    margin: auto;
-    padding: 20px;
-    border-radius: 20px;
-    width: 50%;
-    text-align: center;
+	margin: auto;
+	padding: 20px;
+	border-radius: 20px;
+	width:  50%;
+	text-align: center;
 }
 
 .playlistFlexContainer {
@@ -274,6 +266,35 @@ button:hover {
     /* padding-top: 40px; */
     padding-top: 15px;
     padding-bottom: 5px;
+}
+
+.instructionContent {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	text-align: left;
+}
+
+.instructionRow {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	justify-content: left;
+}
+
+.instructionsText {
+	text-align: left;
+	padding-left: 10px;
+}
+
+.instructionHeader {
+	font-size: large;
+}
+
+.instructionPoints {
+	margin-left: 25px;
+	display: flex;
+	flex-direction: column;
 }
 
 textarea {

@@ -277,9 +277,9 @@ function openInstructionModal() {
 window.onclick = function(event) {
   var playlistModal = document.getElementById("playlistModal");
   var successModal = document.getElementById("successModal");
-  var instructionModal = document.getElementById("instructionModal")
+  var instructionModal = document.getElementById("instructionModal");
 
-  if(playlistModal.style.display == "block" || successModal.style.display == "block") {
+  if(playlistModal.style.display == "block" || successModal.style.display == "block" || instructionModal.style.display == "block") {
     var playlistName = document.getElementById("playlistName");
     var playlistPublic = document.getElementById("playlistPublic");
     var playlistColab = document.getElementById("playlistColab");
@@ -292,10 +292,10 @@ window.onclick = function(event) {
         playlistPublic.checked = false;
         playlistName.value = "";
         playlistDesc.value = "";
-    } 
-  }
-  else if(instructionModal.style.display == "block") {
-        instructionModal.style.display = "none";
+    }
+    else if(event.target == instructionModal) {
+      instructionModal.style.display = "none";
+    }
   }
 };
 

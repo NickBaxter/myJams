@@ -72,8 +72,7 @@
           </div>
         </div>
         <div class="helpBar">
-          <a>instructions</a>
-          <a href="https://github.com/NickBaxter/myJams/issues/new">submit bug</a>
+          <span onclick="openInstructionModal()">instructions</span>
         </div>
         <script src="func.js" type="text/javascript"></script>
       </div>
@@ -82,7 +81,7 @@
       <div class="modalContent">
         <div class="playlistFlexContainer">
           <div class="playlistName">
-            <span>Playlist Name: </span>
+            <span>Playlist Name*: </span>
             <input id="playlistName" type="text" name="playlistName" placeholder="Playlist Name">
           </div>
           <div class="playlistPublic">
@@ -99,6 +98,7 @@
             <textarea id="playlistDesc" placeholder="Playlist Description"></textarea>
           </form>
         </div>
+        <span>* required field</span>
         <div class="playlistCreate" id="playlistCreate">
           <button class="button" onclick="createPlaylist()"><b>Create</b></button>
         </div>
@@ -109,7 +109,51 @@
         <span><b>Playlist Created!</b></span>
       </div>
     </div>  
-
+    <div id="instructionModal" class="modal">
+      <div class="modalContent" style="width: fit-content;">
+        <div class="instructionContent">
+          <div class="instructionHeader"><b>Search Songs</b></div>
+          <div class="instructionPoints">
+            <span>Select Time Range</span>
+            <span>Input number of songs to return between 1-50.</span>
+            <span>Click Search</span>
+          </div>
+          <br>
+          <div class="instructionHeader"><b>Create Playlist</b></div>
+          <div class="instructionPoints">
+            <span>De-select any songs you don't want to add.</span>
+            <span>Click Create Playlist</span>
+            <span>Enter playlist name and other info you want.</span>
+            <span>Click Create</span>
+            <span>The playlist will now be added to your account.</span>
+            <span style="font-style: italic; font-size: small;">*Sometimes this takes a minute</span>
+          </div>
+          <br>
+          <div class="instructionHeader"><b>Time Ranges</b></div>
+          <div class="instructionPoints">
+            <div class="instructionRow">
+              <b>Long: </b>
+              <div class="instructionsText">
+                <span>Several years of data and including all new data as it becomes available.</span>
+              </div>
+            </div>
+            <div class="instructionRow">
+              <b>Medium: </b>
+              <div class="instructionsText">
+                <span>Approximately last 6 months.</span>
+              </div>
+            </div>
+            <div class="instructionRow">
+              <b>Short: </b>
+              <div class="instructionsText">
+                <span>Approximately last 4 weeks.</span>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script id="user-profile-template" type="text/x-handlebars-template">
       <div class="row">  

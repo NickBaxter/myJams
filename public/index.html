@@ -1,5 +1,16 @@
 <!doctype html>
 <html lang="en">
+  <script type="text/javascript">
+    var ua = window.navigator.userAgent;
+
+    var msie = ua.indexOf('MSIE ');
+    var trid = ua.indexOf('Trident');
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+      // IE 10 or older => return version number
+      alert("You're using Internet Explorer which is unsupported for this site. Please use Edge or another up to date browser.");
+      var browser = parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+    }    
+  </script>
   <head>
     <link rel="icon" href="/favicon.ico" />
     <title>SpotMyJams</title>
@@ -131,11 +142,11 @@
           </div>
           <br>
           <div class="instructionHeader"><b>Time Ranges</b></div>
-          <div class="instructionPoints">
+          <div class="instructionPoints">                        
             <div class="instructionRow">
-              <b>Long: </b>
+              <b>Short: </b>
               <div class="instructionsText">
-                <span>Several years of data and including all new data as it becomes available.</span>
+                <span>Approximately last 4 weeks.</span>
               </div>
             </div>
             <div class="instructionRow">
@@ -145,9 +156,9 @@
               </div>
             </div>
             <div class="instructionRow">
-              <b>Short: </b>
+              <b>Long: </b>
               <div class="instructionsText">
-                <span>Approximately last 4 weeks.</span>
+                <span>Several years of data and including all new data as it becomes available.</span>
               </div>
             </div>
           </div>

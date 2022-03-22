@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
   <script type="text/javascript">
+    //Detects if user is using IE
     var ua = window.navigator.userAgent;
 
     var msie = ua.indexOf('MSIE ');
@@ -10,7 +11,7 @@
       alert("You're using Internet Explorer which is unsupported for this site. Please use Edge or another up to date browser.");
       var browser = parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
     }    
-  </script>
+  </script>  
   <head>
     <link rel="icon" href="/favicon.ico" />
     <title>SpotMyJams</title>
@@ -272,5 +273,7 @@
         }      
       })();
     </script>
+    <noscript><img src="https://analysis.identex.co/ingress/0f9e91cf-4f3f-4084-9ff6-afc1be9f1549/pixel.gif"></noscript>
+    <script src="https://analysis.identex.co/ingress/0f9e91cf-4f3f-4084-9ff6-afc1be9f1549/script.js"></script>
   </body>
 </html>
